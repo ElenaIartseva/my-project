@@ -1,0 +1,10 @@
+{
+  "navMain": "Main",
+  "navAbout": "About",
+  "sidebarExpand": "Expand sidebar",
+  "sidebarCollapse": "Collapse sidebar",
+  "themeSwitchToDark": "Switch to dark theme",
+  "themeSwitchToLight": "Switch to light theme",
+  "langSwitchToEn": "Switch to English",
+  "langSwitchToRu": "Switch to Russian"
+}

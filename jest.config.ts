@@ -4,7 +4,7 @@
  */
 
 import type { Config } from 'jest';
-import path from "path";
+import path from 'path';
 
 const config: Config = {
   // All imported modules in your tests should be mocked automatically
@@ -98,7 +98,9 @@ const config: Config = {
     '@config/(.*)': '<rootDir>config/$1',
     '@components/(.*)': '<rootDir>src/components/$1',
     '@context/(.*)': '<rootDir>src/context/$1',
-    '@pages': '<rootDir>src/pages/$1',
+    '@pages/(.*)': '<rootDir>/src/pages/$1',
+    '@pages$': '<rootDir>/src/pages/index.ts',
+    '@styles/(.*)': '<rootDir>/src/styles/$1',
     '@utils/(.*)': '<rootDir>src/utils/$1',
     '@constants/(.*)': '<rootDir>src/utils/constants/$1',
     '@hooks/(.*)': '<rootDir>src/utils/hooks/$1',
@@ -137,7 +139,7 @@ const config: Config = {
   // The root directory that Jest should scan for tests and modules within
   // путь для главной папки
 
-  rootDir: '../TypeScript-project/',
+  rootDir: '.',
 
   // A list of paths to directories that Jest should use to search for files in
   roots: [
@@ -153,6 +155,7 @@ const config: Config = {
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   setupFilesAfterEnv: [
     '@testing-library/jest-dom',
+    '<rootDir>/config/jest/setupTests.ts',
   ],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.

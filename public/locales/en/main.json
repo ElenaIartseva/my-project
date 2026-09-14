@@ -1,8 +1,7 @@
 {
   "title": "Main page",
-  "textBtn1": "Main",
-  "textBtn2": "About",
-  "textBtn3": "Main",
-  "textBtn4": "About",
-  "textBtn5": "Show modal window"
+  "textBtn5": "Show modal window",
+  "modalTitle": "Modal window",
+  "modalClose": "Close",
+  "modalContent": "This is demo modal content."
 }

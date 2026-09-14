@@ -1,3 +1,7 @@
 {
-  "errorPageTitle": "Что-то пошло не так"
+  "errorPageTitle": "Что-то пошло не так",
+  "errorPageRetry": "Попробовать снова",
+  "notFoundTitle": "404",
+  "notFoundMessage": "Страница не найдена",
+  "notFoundBack": "На главную"
 }

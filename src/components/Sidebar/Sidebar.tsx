@@ -1,7 +1,7 @@
 import cn from 'classnames';
-import AppButton, { AppButtonVariant, ComponentType } from '@components/custom/AppButton/AppButton';
-import { AppRoutes, RoutePaths } from '@config/routes/routes.config';
-import { useCallback, useMemo, useState } from 'react';
+import AppButton, { AppButtonVariant } from '@components/custom/AppButton/AppButton';
+import NavLinks, { NavLinksVariant } from '@components/NavLinks/NavLinks';
+import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './Sidebar.module.scss';
 
@@ -10,47 +10,34 @@ type SidebarProps = {
 };
 
 function Sidebar(props: SidebarProps) {
+  const { t } = useTranslation('common');
 
-  const { t } = useTranslation('about');
-
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const onToggle = useCallback(() => {
-    setIsCollapsed((s) => !s)
+    setIsExpanded((expanded) => !expanded);
   }, []);
 
-  const mods = useMemo(() => ({
-    [styles.collapsed]: isCollapsed,
-  }), [isCollapsed]);
-
   return (
-    <div className={cn(styles.Sidebar, mods, [props.className])} data-testid="Sidebar">
+    <div
+      className={cn(styles.Sidebar, { [styles.expanded]: isExpanded }, [props.className])}
+      data-testid="Sidebar"
+      data-expanded={isExpanded}
+    >
+      <NavLinks
+        variant={NavLinksVariant.SIDEBAR}
+        linkClassName={styles.link}
+        isExpanded={isExpanded}
+      />
       <AppButton
-				className={styles.link}
-				componentType={ComponentType.link}
-				to={RoutePaths[AppRoutes.MAIN]}
-				variant={AppButtonVariant.TEXT_CONTRAST}
-				text={t('textBtn3')}
-				hasPathIcon
-				isTextHidden={isCollapsed}
-			/>
-			<AppButton
-				className={styles.link}
-				componentType={ComponentType.link}
-				to={RoutePaths[AppRoutes.ABOUT]}
-				variant={AppButtonVariant.TEXT_CONTRAST}
-				text={t('textBtn4')}
-				hasPathIcon
-				isTextHidden={isCollapsed}
-			/>
-      <AppButton
-        className={styles.collapsedBtn}
-        text={isCollapsed ? '<' : '>'}
+        className={styles.toggleBtn}
+        text={isExpanded ? '<' : '>'}
         variant={AppButtonVariant.CONTAINED}
         onClick={onToggle}
+        aria-label={isExpanded ? t('sidebarCollapse') : t('sidebarExpand')}
       />
     </div>
   );
-};
+}
 
 export default Sidebar;

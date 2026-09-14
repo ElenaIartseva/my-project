@@ -1,3 +1,5 @@
-const EmptyComponent = () => <div />
+function EmptyComponent() {
+  return <div />
+}
 
 export default EmptyComponent;

@@ -1,20 +1,18 @@
-import { useContext, useEffect } from 'react';
-import { Theme, ThemeContext } from '../../context/ThemeContext';
-import LOCAL_STORAGE_KEYS from '../constants/localStorage';
+import { useContext } from 'react';
+import { Theme, ThemeContext } from '@context/ThemeContext';
 
 const useTheme = () => {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const context = useContext(ThemeContext);
 
-  useEffect(() => {
-    if (theme) {
-      document.body.className = theme
-    }
-  }, [theme]);
+  if (!context) {
+    throw new Error('useTheme must be used within ThemeProvider');
+  }
+
+  const { theme, setTheme } = context;
 
   const toggleTheme = () => {
-    const newTheme = theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT
-    setTheme(newTheme)
-    localStorage.setItem(LOCAL_STORAGE_KEYS.theme, newTheme)
+    const newTheme = theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
+    setTheme(newTheme);
   };
 
   return {

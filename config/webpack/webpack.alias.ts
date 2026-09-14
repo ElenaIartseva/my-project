@@ -2,7 +2,7 @@ import { BuildOptions } from './webpack.types';
 
 const webpackAlias = (options: BuildOptions): Record<string, string> => {
   const { alias } = options;
-  
+
   return {
     '@assets': alias.assets,
     '@config': alias.config,

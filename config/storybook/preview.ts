@@ -1,21 +1,19 @@
-import type { Preview } from "@storybook/react";
-import withStylesDecorator from "@config/storybook/decorators/withStylesDecorator";
-import withThemeDecorator from "@config/storybook/decorators/withThemeDecorator";
-import withRouteDecorator from "@config/storybook/decorators/withRouteDecorator";
-import { Theme } from "@context/ThemeContext";
+import type { Preview } from '@storybook/react';
+import withStylesDecorator from '@config/storybook/decorators/withStylesDecorator';
+import withThemeDecorator from '@config/storybook/decorators/withThemeDecorator';
+import withRouteDecorator from '@config/storybook/decorators/withRouteDecorator';
+import { Theme } from '@context/ThemeContext';
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
+    actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
       },
     },
-    parameters: {
-      layout: 'centered',
-    },
+    layout: 'centered',
   },
   globalTypes: {
     theme: {
@@ -26,12 +24,12 @@ const preview: Preview = {
           {
             value: Theme.LIGHT,
             title: Theme.LIGHT,
-            icon: 'sun'
+            icon: 'sun',
           },
           {
             value: Theme.DARK,
             title: Theme.DARK,
-            icon: 'moon'
+            icon: 'moon',
           },
         ],
         dynamicTitle: true,
@@ -42,7 +40,7 @@ const preview: Preview = {
     withStylesDecorator,
     withThemeDecorator,
     withRouteDecorator,
-  ]
+  ],
 };
 
 export default preview;

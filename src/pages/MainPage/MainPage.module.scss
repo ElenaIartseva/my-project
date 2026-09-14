@@ -6,12 +6,12 @@
   background-color: transparent;
   border-radius: 2rem;
   border: none;
-  box-shadow: -10px -5px 20px rgba(255, 255, 255, 0.5);
+  box-shadow: -10px -5px 20px rgb(255 255 255 / 50%);
   margin: 50px;
 }
 
 .btnModal:hover {
-  box-shadow: inset -15px -15px 20px rgba(255, 255, 255, 0.5);
+  box-shadow: inset -15px -15px 20px rgb(255 255 255 / 50%);
 }
 
 .btnClose {
@@ -25,4 +25,8 @@
   font-weight: 900;
   cursor: pointer;
   font-size: 18px;
+}
+
+.modalText {
+  margin: 0;
 }

@@ -7,6 +7,6 @@ function AboutPage() {
       <h2>{t('title')}</h2>
     </div>
   );
-};
+}
 
 export default AboutPage;

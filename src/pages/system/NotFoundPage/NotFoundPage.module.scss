@@ -1,4 +1,4 @@
-.ErrorPage {
+.NotFoundPage {
   font: var(--font-l);
   height: 100%;
   display: flex;
@@ -7,4 +7,13 @@
   align-items: center;
   gap: 1rem;
   text-align: center;
+}
+
+.title {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.message {
+  margin: 0;
 }

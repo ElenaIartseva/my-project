@@ -11,6 +11,6 @@ function PageWrapper(props: PageWrapperProps) {
       {props.children}
     </div>
   );
-};
+}
 
 export default PageWrapper;

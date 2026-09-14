@@ -38,13 +38,13 @@ const webpackLoaders = (buildOptions: BuildOptions) => {
       'sass-loader',
     ],
   };
- 
-  return [ 
-		tsLoader,
-		fileLoader,
-		svgLoader,
-		cssLoader
-	]
+
+  return [
+    tsLoader,
+    fileLoader,
+    svgLoader,
+    cssLoader,
+  ]
 };
 
 export default webpackLoaders;

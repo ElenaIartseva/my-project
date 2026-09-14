@@ -73,13 +73,13 @@
   }
 
   &.hovered:hover {
-    /*&.text {
+    /* &.text {
       @include button-text-hovered(var(--bg-primary-hovered), var(--text-primary-hovered));
-    }*/
+    } */
 
-    /*&.text-contrast {
+    /* &.text-contrast {
       @include button-text-hovered(var(--bg-contrast-hovered), var(--text-contrast-hovered));
-    }*/
+    } */
 
     &.outlined {
       @include button-outlined-hovered(var(--bg-primary-hovered), var(--text-primary-hovered));

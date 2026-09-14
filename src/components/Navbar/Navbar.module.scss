@@ -31,14 +31,14 @@
   background-color: transparent;
   border-radius: 2rem;
   border: none;
-  box-shadow: -10px -5px 20px rgba(255, 255, 255, 0.5);
+  box-shadow: -10px -5px 20px rgb(255 255 255 / 50%);
 }
 
 .btnNavbar:hover {
-  box-shadow: inset -15px -15px 20px rgba(255, 255, 255, 0.5);
+  box-shadow: inset -15px -15px 20px rgb(255 255 255 / 50%);
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (width <= 350px) {
   .Navbar {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;

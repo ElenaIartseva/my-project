@@ -1,0 +1,10 @@
+{
+  "navMain": "Главная",
+  "navAbout": "О нас",
+  "sidebarExpand": "Развернуть боковую панель",
+  "sidebarCollapse": "Свернуть боковую панель",
+  "themeSwitchToDark": "Включить тёмную тему",
+  "themeSwitchToLight": "Включить светлую тему",
+  "langSwitchToEn": "Переключить на английский",
+  "langSwitchToRu": "Переключить на русский"
+}

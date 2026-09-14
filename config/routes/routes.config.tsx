@@ -1,11 +1,11 @@
-import { MainPage, AboutPage } from '@pages';
+import { MainPage, AboutPage, NotFoundPage } from '@pages';
 import { RouteProps } from 'react-router-dom';
 
 export enum AppRoutes {
   MAIN = 'main',
   ABOUT = 'about',
   NOT_FOUND = '*',
-};
+}
 
 export const RoutePaths: Record<string, string> = {
   [AppRoutes.MAIN]: '/',
@@ -24,6 +24,6 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
   },
   [AppRoutes.NOT_FOUND]: {
     path: RoutePaths[AppRoutes.NOT_FOUND],
-    element: <div>NOT FOUND</div>, // пока заглушка вместо страницы
+    element: <NotFoundPage />,
   },
 };

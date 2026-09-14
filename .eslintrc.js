@@ -29,8 +29,6 @@ module.exports = {
 		'no-underscore-dangle': 0,
 		'no-unused-vars': 0,
 		'max-len': [2, { ignoreComments: true, code: 120 }],
-		rules:{
-			"linebreak-style": 0
-		}
+		'linebreak-style': 0,
 	},
 };

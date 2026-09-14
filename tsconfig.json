@@ -1,27 +1,33 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
-    "noImplicitAny": true, 
-    "module": "ESNext", 
-    "target": "es5", 
+    "baseUrl": ".",
+    "strict": true,
+    "noImplicitAny": true,
+    "module": "ESNext",
+    "target": "es5",
     "jsx": "react-jsx",
     "allowJs": true,
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true, 
-    "esModuleInterop": true, 
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "paths": {
       "@assets/*": ["./src/assets/*"],
       "@config/*": ["./config/*"],
       "@components/*": ["./src/components/*"],
       "@context/*": ["./src/context/*"],
-      "@pages": ["./src/pages"],
+      "@pages": ["./src/pages/index.ts"],
+      "@pages/*": ["./src/pages/*"],
       "@styles/*": ["./src/styles/*"],
       "@utils/*": ["./src/utils/*"],
       "@constants/*": ["./src/utils/constants/*"],
       "@hooks/*": ["./src/utils/hooks/*"]
     },
-    "types": ["node", "jest", "@testing-library/jest-dom"], 
+    "types": ["node", "jest", "@testing-library/jest-dom"]
   },
+  "include": ["src", "config", "webpack.config.ts", "jest.config.ts"],
+  "exclude": ["node_modules", "build", "coverage"],
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"

@@ -7,7 +7,7 @@ import webpackAlias from './webpack.alias';
 
 interface Configuration extends WebpackConfiguration {
   devServer: WebpackDevServerConfiguration
-};
+}
 
 const webpackConfig = (buildOptions: BuildOptions): Configuration => ({
   devServer: {
@@ -15,9 +15,12 @@ const webpackConfig = (buildOptions: BuildOptions): Configuration => ({
     historyApiFallback: true,
     open: true,
     hot: true,
+    static: {
+      directory: buildOptions.paths.public,
+    },
     client: {
-			overlay: false
-		}
+      overlay: false,
+    },
   },
   devtool: buildOptions.isDev ? 'inline-source-map' : false,
   mode: buildOptions.mode,

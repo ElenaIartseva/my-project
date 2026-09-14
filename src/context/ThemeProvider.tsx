@@ -1,36 +1,56 @@
-import {ReactNode, useState, useMemo} from "react";
-import {Theme, ThemeContext} from "./ThemeContext";
-import LOCAL_STORAGE_KEYS from "@constants/localStorage";
+import {
+  ReactNode, useCallback, useEffect, useMemo, useState,
+} from 'react';
+import LOCAL_STORAGE_KEYS from '@constants/localStorage';
+import { Theme, ThemeContext } from './ThemeContext';
 
 type ThemeProviderProps = {
-	children: ReactNode
-	initialTheme?: Theme
+  children: ReactNode
+  initialTheme?: Theme
 };
 
-const defaultTheme = localStorage.getItem(LOCAL_STORAGE_KEYS.theme) as Theme || Theme.LIGHT;
+function getStoredTheme(): Theme {
+  const storedTheme = localStorage.getItem(LOCAL_STORAGE_KEYS.theme);
 
-const ThemeProvider = (props: ThemeProviderProps) => {
-	const {
-		children,
-		initialTheme
-	} = props;
+  if (storedTheme === Theme.LIGHT || storedTheme === Theme.DARK) {
+    return storedTheme;
+  }
 
-	const [theme, setTheme] = useState(initialTheme || defaultTheme);
-	
-	
-	const defaultValue = useMemo(() => ({
+  return Theme.LIGHT;
+}
+
+function applyThemeClass(theme: Theme) {
+  document.body.classList.remove(Theme.LIGHT, Theme.DARK);
+  document.body.classList.add(theme);
+}
+
+function ThemeProvider(props: ThemeProviderProps) {
+  const {
+    children,
+    initialTheme,
+  } = props;
+
+  const [theme, setThemeState] = useState(initialTheme ?? getStoredTheme());
+
+  useEffect(() => {
+    applyThemeClass(theme);
+  }, [theme]);
+
+  const setTheme = useCallback((newTheme: Theme) => {
+    setThemeState(newTheme);
+    localStorage.setItem(LOCAL_STORAGE_KEYS.theme, newTheme);
+  }, []);
+
+  const defaultValue = useMemo(() => ({
     theme,
     setTheme,
-  }), [
-    theme,
-    setTheme,
-  ])
-	
-	return (
-		<ThemeContext.Provider value={defaultValue}>
-			{children}
-		</ThemeContext.Provider>
-	);
-};
+  }), [theme, setTheme]);
+
+  return (
+    <ThemeContext.Provider value={defaultValue}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
 
 export default ThemeProvider;

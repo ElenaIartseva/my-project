@@ -10,14 +10,11 @@ function MainPage() {
   const [isOpened, setIsOpened] = useState(false);
 
   const onClose = useCallback(() => setIsOpened(false), []);
-
   const onOpen = useCallback(() => setIsOpened(true), []);
 
   return (
     <>
-      <h2>
-        {t('title')}
-      </h2>
+      <h2>{t('title')}</h2>
       <AppButton
         onClick={onOpen}
         text={t('textBtn5')}
@@ -28,21 +25,20 @@ function MainPage() {
       <AppModal
         isOpen={isOpened}
         onClose={onClose}
-        title='Модальное окно'
+        title={t('modalTitle')}
       >
-        <button
-        className={cn(styles.btnClose)}
-        onClick={onClose}
-        >
-          Х
-        </button>
-        <div>children</div>
-        <div>children</div>
-        <div>children</div>
-        <div>children</div>
+        <AppButton
+          className={cn(styles.btnClose)}
+          componentType={ComponentType.button}
+          variant={AppButtonVariant.TEXT}
+          onClick={onClose}
+          text={t('modalClose')}
+          aria-label={t('modalClose')}
+        />
+        <p className={styles.modalText}>{t('modalContent')}</p>
       </AppModal>
     </>
   );
-};
+}
 
 export default MainPage;

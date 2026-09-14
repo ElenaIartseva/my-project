@@ -1,9 +1,7 @@
-import AppButton, { AppButtonVariant, ComponentType } from '@components/custom/AppButton/AppButton';
-import { AppRoutes, RoutePaths } from '@config/routes/routes.config';
 import ThemeSwitcher from '@components/ThemeSwitcher/ThemeSwitcher';
-import { useTranslation } from 'react-i18next';
-import cn from 'classnames';
 import LangSwitcher from '@components/LangSwitcher/LangSwitcher';
+import NavLinks, { NavLinksVariant } from '@components/NavLinks/NavLinks';
+import cn from 'classnames';
 import styles from './Navbar.module.scss';
 
 type NavbarProps = {
@@ -13,36 +11,19 @@ type NavbarProps = {
 function Navbar(props: NavbarProps) {
   const { className } = props;
 
-  const { t } = useTranslation('about');
-
   return (
     <div className={cn(styles.Navbar, {}, [className])}>
       <div className={styles.switchers}>
         <LangSwitcher />
         <ThemeSwitcher />
       </div>
-      <div className={cn(styles.links)}>
-        <AppButton
-          className={cn(styles.btnNavbar)}
-          componentType={ComponentType.link}
-          to={RoutePaths[AppRoutes.MAIN]}
-          variant={AppButtonVariant.TEXT_CONTRAST}
-          text={t('textBtn1')}
-          isTextHidden={true}
-          hasPathIcon={false}
-        />
-        <AppButton
-          className={cn(styles.btnNavbar)}
-          componentType={ComponentType.link}
-          to={RoutePaths[AppRoutes.ABOUT]}
-          variant={AppButtonVariant.TEXT_CONTRAST}
-          text={t('textBtn2')}
-          isTextHidden={true}
-          hasPathIcon={false}
-        />
-      </div>
+      <NavLinks
+        variant={NavLinksVariant.NAVBAR}
+        className={styles.links}
+        linkClassName={styles.btnNavbar}
+      />
     </div>
   );
-};
+}
 
 export default Navbar;

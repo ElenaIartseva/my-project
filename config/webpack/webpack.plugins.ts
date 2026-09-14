@@ -1,6 +1,7 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import { BuildOptions } from './webpack.types';
 
 const webpackPlugins = (buildOptions: BuildOptions) => [
@@ -9,7 +10,18 @@ const webpackPlugins = (buildOptions: BuildOptions) => [
   }),
   new webpack.ProgressPlugin(),
   new webpack.DefinePlugin({
-    _GLOBAL_IS_DEV_: JSON.stringify(true),
+    _GLOBAL_IS_DEV_: JSON.stringify(buildOptions.isDev),
+  }),
+  new CopyWebpackPlugin({
+    patterns: [
+      {
+        from: buildOptions.paths.public,
+        to: buildOptions.paths.build,
+        globOptions: {
+          ignore: ['**/index.html'],
+        },
+      },
+    ],
   }),
   new MiniCssExtractPlugin(),
 ];

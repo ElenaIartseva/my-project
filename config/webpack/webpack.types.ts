@@ -1,7 +1,7 @@
 export enum BuildModes {
   development = 'development',
   production = 'production',
-};
+}
 
 export type BuildOptions = {
   mode: keyof typeof BuildModes
@@ -10,7 +10,8 @@ export type BuildOptions = {
   paths: {
     entry: string,
     build: string,
-    html: string
+    html: string,
+    public: string,
   }
   alias: {
     assets: string

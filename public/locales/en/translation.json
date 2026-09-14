@@ -1,3 +1,7 @@
 {
-  "errorPageTitle": "Something went wrong"
+  "errorPageTitle": "Something went wrong",
+  "errorPageRetry": "Try again",
+  "notFoundTitle": "404",
+  "notFoundMessage": "Page not found",
+  "notFoundBack": "Back to home"
 }
