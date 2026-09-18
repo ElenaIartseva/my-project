@@ -27,8 +27,16 @@ const webpackConfig = (buildOptions: BuildOptions): Configuration => ({
   entry: buildOptions.paths.entry,
   output: {
     filename: '[name].[contenthash].js',
+    chunkFilename: '[name].[contenthash].js',
+    assetModuleFilename: 'assets/[name].[contenthash][ext]',
     path: buildOptions.paths.build,
     clean: true,
+  },
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   plugins: webpackPlugins(buildOptions),
   module: {

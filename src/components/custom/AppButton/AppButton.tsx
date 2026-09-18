@@ -26,27 +26,40 @@ export enum ComponentType {
   link = 'link',
 }
 
-type ButtonTypeUnion = ButtonHTMLAttributes<HTMLButtonElement> | NavLinkProps;
-
 export function getPathIcon(path?: string): JSX.Element | null {
   if (path === RoutePaths[AppRoutes.MAIN]) return <MainIcon />;
   if (path === RoutePaths[AppRoutes.ABOUT]) return <AboutIcon />;
   return null;
 }
 
-type AppButtonProps = ButtonTypeUnion & {
+type AppButtonBaseProps = {
   className?: string
   text?: string | JSX.Element
   variant?: AppButtonVariant
   size?: AppButtonSize
   isDisabled?: boolean
   isTextVisible?: boolean
-  onClick?: () => void
-  to?: string
-  hasPathIcon?: boolean
-  componentType?: ComponentType
+  isIconOnly?: boolean
   'aria-label'?: string
 };
+
+type AppButtonAsButtonProps = AppButtonBaseProps
+& Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'className' | 'children' | 'disabled' | 'type'>
+& {
+  componentType?: ComponentType.button
+  to?: never
+  hasPathIcon?: never
+};
+
+type AppButtonAsLinkProps = AppButtonBaseProps
+& Omit<NavLinkProps, 'className' | 'children' | 'to'>
+& {
+  componentType: ComponentType.link
+  to: NavLinkProps['to']
+  hasPathIcon?: boolean
+};
+
+type AppButtonProps = AppButtonAsButtonProps | AppButtonAsLinkProps;
 
 /**
  * Компонент для кнопки или ссылки
@@ -64,32 +77,30 @@ type AppButtonProps = ButtonTypeUnion & {
  */
 function AppButton(props: AppButtonProps) {
   const {
-    componentType = ComponentType.button,
     className,
     text = '',
     variant = AppButtonVariant.TEXT,
     size = AppButtonSize.M,
     isDisabled = false,
     isTextVisible = false,
-    onClick,
-    to,
-    hasPathIcon,
+    isIconOnly = false,
     'aria-label': ariaLabel,
   } = props;
 
   const containerMods = useMemo(() => ({
     [styles.disabled]: isDisabled,
     [styles.hovered]: !isDisabled,
-  }), [isDisabled]);
+    [styles.iconOnly]: isIconOnly,
+  }), [isDisabled, isIconOnly]);
 
   const linkMods = useMemo(() => ({
     ...containerMods,
-    [styles.linkStyles]: componentType === ComponentType.link,
-  }), [containerMods, componentType]);
+    [styles.linkStyles]: props.componentType === ComponentType.link,
+  }), [containerMods, props.componentType]);
 
-  const pathIcon = getPathIcon(to);
+  if (props.componentType !== ComponentType.link) {
+    const { onClick } = props;
 
-  if (componentType === ComponentType.button) {
     return (
       <button
         type="button"
@@ -112,43 +123,45 @@ function AppButton(props: AppButtonProps) {
     );
   }
 
-  if (componentType === ComponentType.link) {
-    return (
-      <NavLink
-        to={to ?? ''}
-        className={({ isActive }) => cn(
-          styles.AppButton,
-          { ...linkMods, [styles.isActive]: isActive },
-          [styles[variant], className],
-        )}
-        data-testid="link"
-        aria-label={ariaLabel ?? (typeof text === 'string' ? text : undefined)}
-      >
-        <div
-          role="presentation"
-          className={cn(styles.AppButtonContainer, containerMods, [styles[size]])}
-        >
-          <div className={cn(styles.AppButtonStateLayer, [])} />
-          {
-            hasPathIcon && pathIcon !== null && (
-              <div className={styles.icon}>
-                {pathIcon}
-              </div>
-            )
-          }
-          {
-            isTextVisible && (
-              <span className={cn(styles.label, {}, [styles.Text])}>
-                {text}
-              </span>
-            )
-          }
-        </div>
-      </NavLink>
-    );
-  }
+  const {
+    to,
+    hasPathIcon,
+  } = props;
+  const pathIcon = getPathIcon(typeof to === 'string' ? to : undefined);
 
-  return null;
+  return (
+    <NavLink
+      to={to}
+      className={({ isActive }) => cn(
+        styles.AppButton,
+        { ...linkMods, [styles.isActive]: isActive },
+        [styles[variant], className],
+      )}
+      data-testid="link"
+      aria-label={ariaLabel ?? (typeof text === 'string' ? text : undefined)}
+    >
+      <div
+        role="presentation"
+        className={cn(styles.AppButtonContainer, containerMods)}
+      >
+        <div className={cn(styles.AppButtonStateLayer, [])} />
+        {
+          hasPathIcon && pathIcon !== null && (
+            <div className={styles.icon}>
+              {pathIcon}
+            </div>
+          )
+        }
+        {
+          isTextVisible && (
+            <span className={cn(styles.label, styles.Text, styles[size])}>
+              {text}
+            </span>
+          )
+        }
+      </div>
+    </NavLink>
+  );
 }
 
 export default AppButton;

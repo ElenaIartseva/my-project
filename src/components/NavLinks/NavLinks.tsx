@@ -37,6 +37,7 @@ function NavLinks(props: NavLinksProps) {
           variant={AppButtonVariant.TEXT_CONTRAST}
           text={t(item.labelKey)}
           isTextVisible={isSidebar ? isExpanded : true}
+          isIconOnly={isSidebar}
           hasPathIcon={isSidebar}
           aria-label={t(item.labelKey)}
         />

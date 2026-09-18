@@ -7,9 +7,6 @@ const config: StorybookConfig = {
   ],
   addons: [
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-onboarding',
-    '@storybook/addon-interactions',
   ],
   swc: () => ({
     jsc: {
@@ -22,16 +19,25 @@ const config: StorybookConfig = {
   }),
   framework: {
     name: '@storybook/react-webpack5',
-    options: {
-      builder: {
-        useSWC: true,
-      },
-    },
+    options: {},
   },
   docs: {
-    autodocs: 'tag',
+    autodocs: false,
   },
   webpackFinal: async (webpackConfig) => {
+    const tsLoader = {
+      test: /\.tsx?$/,
+      use: [
+        {
+          loader: 'ts-loader',
+          options: {
+            transpileOnly: true,
+          },
+        },
+      ],
+      exclude: /node_modules/,
+    };
+
     const cssLoader = {
       test: /\.s?css$/i,
       use: [
@@ -49,13 +55,9 @@ const config: StorybookConfig = {
       ],
     };
 
-    const fileLoader = {
+    const assetResourceLoader = {
       test: /\.(png|jpe?g|gif)$/i,
-      use: [
-        {
-          loader: 'file-loader',
-        },
-      ],
+      type: 'asset/resource',
     };
 
     const svgLoader = {
@@ -80,12 +82,16 @@ const config: StorybookConfig = {
 
     return {
       ...webpackConfig,
+      performance: {
+        hints: false,
+      },
       module: {
         ...webpackConfig.module,
         rules: [
+          tsLoader,
           ...webpackConfig.module?.rules ?? [],
           cssLoader,
-          fileLoader,
+          assetResourceLoader,
           svgLoader,
         ],
       },

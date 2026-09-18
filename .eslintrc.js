@@ -28,6 +28,7 @@ module.exports = {
 		'no-undef': 0,
 		'no-underscore-dangle': 0,
 		'no-unused-vars': 0,
+		'@typescript-eslint/no-unused-vars': [2, { argsIgnorePattern: '^_' }],
 		'max-len': [2, { ignoreComments: true, code: 120 }],
 		'linebreak-style': 0,
 	},

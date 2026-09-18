@@ -2,4 +2,4 @@
 /build
 /coverage
 *storybook.log
-.storybook-static
+/storybook-static

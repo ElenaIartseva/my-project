@@ -1,30 +1,13 @@
 .btnModal {
-  display: flex;
-  justify-content: center;
   width: 240px;
-  padding: 10px;
-  background-color: transparent;
-  border-radius: 2rem;
-  border: none;
-  box-shadow: -10px -5px 20px rgb(255 255 255 / 50%);
-  margin: 50px;
-}
-
-.btnModal:hover {
-  box-shadow: inset -15px -15px 20px rgb(255 255 255 / 50%);
+  margin-top: 50px;
 }
 
 .btnClose {
-  display: flex;
   position: absolute;
-  top: -16px;
-  right: -16px;
-  border-radius: 2rem;
-  border: none;
-  background-color: transparent;
-  font-weight: 900;
-  cursor: pointer;
-  font-size: 18px;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
 }
 
 .modalText {

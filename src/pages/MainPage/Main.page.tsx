@@ -30,7 +30,7 @@ function MainPage() {
         <AppButton
           className={cn(styles.btnClose)}
           componentType={ComponentType.button}
-          variant={AppButtonVariant.TEXT}
+          variant={AppButtonVariant.TEXT_CONTRAST}
           onClick={onClose}
           text={t('modalClose')}
           aria-label={t('modalClose')}

@@ -5,7 +5,8 @@
   position: absolute;
   inset: 0;
   border-radius: 50px;
-  z-index: -1;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .AppButton {
@@ -17,7 +18,12 @@
   border: none;
   cursor: pointer;
   position: relative;
+  display: inline-flex;
   width: fit-content;
+  height: fit-content;
+  isolation: isolate;
+
+  @include button-elevation(var(--button-elevation-outer), var(--button-elevation-inner));
 
   // варианты стилей
   &.text {
@@ -47,6 +53,11 @@
   &.disabled {
     pointer-events: none;
 
+    @include button-elevation-disabled(
+      var(--button-elevation-outer-disabled),
+      var(--button-elevation-inner-disabled)
+    );
+
     &.text {
       @include button-text-disabled(var(--bg-primary-disabled), var(--text-primary-hovered-disabled));
     }
@@ -73,13 +84,10 @@
   }
 
   &.hovered:hover {
-    /* &.text {
-      @include button-text-hovered(var(--bg-primary-hovered), var(--text-primary-hovered));
-    } */
-
-    /* &.text-contrast {
-      @include button-text-hovered(var(--bg-contrast-hovered), var(--text-contrast-hovered));
-    } */
+    @include button-elevation-hover(
+      var(--button-elevation-outer-hover),
+      var(--button-elevation-inner-hover)
+    );
 
     &.outlined {
       @include button-outlined-hovered(var(--bg-primary-hovered), var(--text-primary-hovered));
@@ -111,6 +119,8 @@
   z-index: 1;
 
   .icon {
+    position: relative;
+    z-index: 1;
     margin-right: spacing(0.5);
     fill: var(--bg-primary);
     transition: fill var(--transition-duration) var(--transition-timing-fn);
@@ -123,6 +133,8 @@
 }
 
 .Text {
+  position: relative;
+  z-index: 1;
   width: max-content;
 
   &.s {
@@ -152,4 +164,54 @@
     color: var(--text-secondary);
     transition: all var(--transition-duration) var(--transition-timing-fn);
   }
+}
+
+.iconOnly {
+  @include button-elevation-disabled(none, none);
+
+  .AppButtonStateLayer {
+    box-shadow: none;
+    background: transparent !important;
+    transform: none;
+    border-radius: 12px;
+    transition: background var(--transition-duration) var(--transition-timing-fn);
+  }
+
+  &.hovered:hover {
+    @include button-elevation-disabled(none, none);
+
+    .AppButtonStateLayer {
+      transform: none;
+      background: var(--bg-contrast-hovered) !important;
+    }
+  }
+
+  .AppButtonContainer {
+    grid-template-columns: min-content;
+    padding: spacing(0.75);
+
+    &:has(.label) {
+      grid-template-columns: min-content min-content;
+      gap: spacing(0.5);
+      padding: spacing(0.75) spacing(1);
+    }
+  }
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+  }
+}
+
+.label {
+  position: relative;
+  z-index: 1;
 }

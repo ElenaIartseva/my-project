@@ -8,13 +8,9 @@ const webpackLoaders = (buildOptions: BuildOptions) => {
     exclude: /node_modules/,
   };
 
-  const fileLoader = {
+  const assetResourceLoader = {
     test: /\.(png|jpe?g|gif)$/i,
-    use: [
-      {
-        loader: 'file-loader',
-      },
-    ],
+    type: 'asset/resource',
   };
 
   const svgLoader = {
@@ -41,7 +37,7 @@ const webpackLoaders = (buildOptions: BuildOptions) => {
 
   return [
     tsLoader,
-    fileLoader,
+    assetResourceLoader,
     svgLoader,
     cssLoader,
   ]

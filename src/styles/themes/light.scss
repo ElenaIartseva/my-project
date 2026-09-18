@@ -65,4 +65,12 @@
   --bg-contrast-surface: rgba(var(--theme-light), var(--transparency-87));
   --bg-contrast-surface-hovered: rgba(var(--theme-light), var(--transparency-75));
   --bg-contrast-surface-disabled: rgba(var(--theme-light), var(--transparency-50));
+
+  /* Elevation — кнопка «над» поверхностью */
+  --button-elevation-outer: 0 6px 14px rgba(var(--theme-dark), 0.16), 0 2px 4px rgba(var(--theme-dark), 0.1);
+  --button-elevation-inner: inset 0 1px 0 rgba(var(--theme-light), 0.45);
+  --button-elevation-outer-hover: 0 10px 22px rgba(var(--theme-dark), 0.22), 0 4px 8px rgba(var(--theme-dark), 0.14);
+  --button-elevation-inner-hover: inset 0 1px 0 rgba(var(--theme-light), 0.55);
+  --button-elevation-outer-disabled: 0 2px 4px rgba(var(--theme-dark), 0.08);
+  --button-elevation-inner-disabled: inset 0 1px 0 rgba(var(--theme-light), 0.2);
 }

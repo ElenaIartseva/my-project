@@ -25,14 +25,16 @@
 }
 
 .content {
+  position: relative;
   padding: spacing(2);
+  padding-top: spacing(4);
   border-radius: spacing(1);
   background-color: var(--bg-contrast);
   max-width: min(90vw, 480px);
 }
 
 .title {
-  margin-bottom: 20px;
+  margin: 0 spacing(4) 20px 0;
 }
 
 .opened {

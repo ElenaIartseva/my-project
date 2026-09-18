@@ -1,9 +1,33 @@
 // Button
 
+@mixin button-elevation($outer, $inner) {
+  .AppButtonStateLayer {
+    box-shadow: $outer, $inner;
+    transition:
+      box-shadow var(--transition-duration) var(--transition-timing-fn),
+      transform var(--transition-duration) var(--transition-timing-fn),
+      background var(--transition-duration) var(--transition-timing-fn);
+  }
+}
+
+@mixin button-elevation-hover($outer, $inner) {
+  .AppButtonStateLayer {
+    box-shadow: $outer, $inner;
+    transform: translateY(-1px);
+  }
+}
+
+@mixin button-elevation-disabled($outer, $inner) {
+  .AppButtonStateLayer {
+    box-shadow: $outer, $inner;
+    transform: none;
+  }
+}
+
 // initial
 @mixin button-text($textColor) {
   .AppButtonStateLayer {
-    background: transparent;
+    background: rgba(var(--theme-light), var(--transparency-6));
     transition: background var(--transition-duration) var(--transition-timing-fn);
   }
 
