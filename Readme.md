@@ -13,7 +13,7 @@
 - Webpack 5 + TypeScript (`ts-loader`)
 - DevServer с HMR и `historyApiFallback`
 - Production-сборка с code splitting (`React.lazy`)
-- Алиасы путей (`@components`, `@pages`, `@config` и др.)
+- Алиасы путей (`@components`, `@pages`, `@config`, `@assets`, `@hooks`, `@styles`, `@utils`, `@context`, `@constants`)
 - Копирование статики и переводов из `public/` в `build/`
 
 ### UI и компоненты
@@ -21,8 +21,8 @@
 - **Navbar** — переключатели темы и языка, навигация через `NavLinks`
 - **Sidebar** — сворачиваемая боковая панель с иконками маршрутов (`NavLinks`)
 - **NavLinks** — общий компонент навигации для Navbar и Sidebar (конфиг в `config/routes/nav.config.ts`)
-- **AppButton** — универсальная кнопка / ссылка (`NavLink`), поддержка `aria-label`
-- **AppModal** — модальное окно через React Portal (Escape, центрирование, `aria-*`)
+- **AppButton** — универсальная кнопка / ссылка (`NavLink`), варианты стилей, режим icon-only для Sidebar, поддержка `aria-label`
+- **AppModal** — модальное окно через React Portal (Escape, focus trap, блокировка скролла `body`, центрирование, `aria-*`)
 - **ThemeSwitcher** — светлая / тёмная тема с сохранением в `localStorage`
 - **LangSwitcher** — переключение ru / en
 - **Loader** — fallback для `Suspense`
@@ -51,10 +51,10 @@
 
 - ESLint (Airbnb + TypeScript)
 - Stylelint (SCSS)
-- Jest + React Testing Library (`AppButton`, `Sidebar`)
+- Jest + React Testing Library (`AppButton`, `Sidebar`, `AppModal`)
 - Storybook (`AppButton`)
 - TypeScript `strict`
-- GitHub Actions CI: lint → typecheck → test → build
+- GitHub Actions CI: lint → typecheck → test (`test:jest`) → build
 
 ---
 
@@ -74,9 +74,13 @@ npm run dev
 | `npm run dev` | Dev-сервер |
 | `npm run build:prod` | Production-сборка в `build/` |
 | `npm run lint` | ESLint + Stylelint |
+| `npm run eslint:fix` | ESLint с автоисправлением |
+| `npm run stylelint:fix` | Stylelint с автоисправлением |
 | `npm run typecheck` | Проверка типов TypeScript |
 | `npm test` | Тесты Jest |
+| `npm run test:jest` | Тесты Jest (используется в CI) |
 | `npm run storybook` | Storybook на порту 6006 |
+| `npm run storybook:build` | Статическая сборка Storybook в `storybook-static/` |
 
 ---
 
